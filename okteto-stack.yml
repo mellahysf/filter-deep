@@ -3,8 +3,7 @@ services:
 
   filter_image_django:
     image:okteto.dev/filter_image_django:latest
-    build: .
-    replicas: 1
+    build: "./"
     command: bash -c "gunicorn filter_image_django.wsgi --reload -b 0.0.0.0:8000"
     ports:
       - 8000
