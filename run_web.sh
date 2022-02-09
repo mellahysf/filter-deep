@@ -1,7 +1,14 @@
-#!/bin/sh
+# prepare init migration
+
+python manage.py makemigrations myproject
+echo "Created migrations"
+
+# migrate db, so we have the latest db schema
+
+python manage.py migrate
+echo "Migrated DB to latest version"
 
 #start server
 
 echo "Starting server"
-gunicorn filter_image_django.wsgi
-python manage.py runserver
+gunicorn simple_rbas.wsgi
