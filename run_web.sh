@@ -11,4 +11,4 @@ echo "Migrated DB to latest version"
 #start server
 
 echo "Starting server"
-gunicorn simple_rbas.wsgi
+gunicorn filter_image_django.wsgi
