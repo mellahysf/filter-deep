@@ -37,7 +37,7 @@ class Filter(APIView):
         # Getting Image and filter name
         request_data = QueryDict.dict(request.data)
         filter_name = int(request_data['filter_name'])
-        image = request.FILES['file']
+        image = request.FILES['img_name']
         print("///////////////////////:", image)
         # imageName = request_data.get('name')
 

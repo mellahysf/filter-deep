@@ -1,6 +1,17 @@
 name: filter-image-django
 services:
 
+  rbas-db:
+    image: postgres:11
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=pgpass
+      - POSTGRES_DB=filterimgdb
+    resources:
+      cpu: 100m
+      memory: 128Mi
   filter_image_django:
     public: true
     image: okteto.dev/filter_image_django:latest
