@@ -1,4 +1,4 @@
-name: filter_image_django
+name: filter-image-django
 services:
 
   filter_image_django:
