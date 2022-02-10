@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser, JSONParser
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.shortcuts import get_object_or_404, render
+from django.views.decorators.csrf import csrf_exempt
 # Import required image modules
 from PIL import Image, ImageFilter
 
@@ -30,6 +32,7 @@ from django.http import QueryDict
 class Filter(APIView):
     parser_classes = (JSONParser, MultiPartParser, FileUploadParser, FormParser, )
 
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
         # Getting Image and filter name
         request_data = QueryDict.dict(request.data)
