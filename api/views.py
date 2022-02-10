@@ -35,24 +35,25 @@ class Filter(APIView):
         request_data = QueryDict.dict(request.data)
         filter_name = int(request_data['filter_name'])
         image = request.FILES['file']
+        print("///////////////////////:", image)
         # imageName = request_data.get('name')
-        path = default_storage.save("inputs/upload/" + str(image), ContentFile(image.read()))
-
-        save_restore_path = inference("media/"+path)
 
         # Adding Filter to image
-        img = Image.open(save_restore_path)
+        img = Image.open(image)
 
         if filter_name == 1:
-            filtered_img = img
+            filtered_img = img.filter(CONTOUR)
         elif filter_name == 2:
-            filtered_img = img
+            filtered_img = img.filter(DETAIL)
         elif filter_name == 3:
-            filtered_img = img
+            filtered_img = img.filter(EDGE_ENHANCE)
         elif filter_name == 4:
-            filtered_img = img
+            filtered_img = img.filter(EMBOSS)
         else:
-            filtered_img = img
+            filtered_img = img.filter(DETAIL)
+
+
+        print("**************************", filtered_img)
 
         model_instance = FilterImg()
 
@@ -67,7 +68,7 @@ class Filter(APIView):
             f.close()
 
         return Response(str(model_instance.image.url))
-
+    
 # View to clear database objects and images in folders
 @api_view(['GET'])
 def clear(request):
