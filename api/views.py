@@ -57,18 +57,26 @@ class Filter(APIView):
 
         model_instance = FilterImg()
 
+        print("teeeeeeeeeeeeeeeeeeeeeeeest 1")
         # Saving the filtered image for download
         f = BytesIO()
+        print("teeeeeeeeeeeeeeeeeeeeeeeest 2")
         try:
             filtered_img.save(f, format='png')
+            print("teeeeeeeeeeeeeeeeeeeeeeeest 3")
             model_instance.image.save(str(random.random())+'.png',
                                         ContentFile(f.getvalue()))
+            print("teeeeeeeeeeeeeeeeeeeeeeeest 4")
             model_instance.save()
+            print("teeeeeeeeeeeeeeeeeeeeeeeest 5")
         finally:
             f.close()
 
+        print("teeeeeeeeeeeeeeeeeeeeeeeest 6")
+
+        print("Response(str(model_instance.image.url)) : ", Response(str(model_instance.image.url)))
         return Response(str(model_instance.image.url))
-    
+
 # View to clear database objects and images in folders
 @api_view(['GET'])
 def clear(request):
