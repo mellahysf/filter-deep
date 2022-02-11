@@ -1,6 +1,7 @@
+#!/bin/sh
 # prepare init migration
 
-python manage.py makemigrations filterimgdb
+python manage.py makemigrations
 echo "Created migrations"
 
 # migrate db, so we have the latest db schema
