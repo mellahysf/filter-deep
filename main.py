@@ -27,7 +27,7 @@ def upload():
         ##!python inference_gfpgan.py --upscale 2 --test_path inputs/upload --save_root results --model_path experiments/pretrained_models/GFPGANCleanv1-NoCE-C2.pth --bg_upsampler realesrgan
         save_restore_path = inference(media_input_upload_path + filename)
         media_output_path = join(dirname(realpath(__file__)), save_restore_path)
-        os.remove(media_input_upload_path + filename)
+        #os.remove(media_input_upload_path + filename)
         fin = time.time()
         print("inference DONE************" + str(fin-deb))
         print("save_restore_path///////////" + save_restore_path)
