@@ -20,7 +20,7 @@ def upload():
         imagefile = request.files['file']
         filename = werkzeug.utils.secure_filename(imagefile.filename)
         print("\nReceived image File name : " + imagefile.filename)
-        media_input_upload_path = join(dirname(realpath(__file__)), 'media/input/upload/')
+        media_input_upload_path = join(dirname(realpath(__file__)), 'media/inputs/upload/')
 
         imagefile.save(media_input_upload_path + filename)
         ## TODO: Call model and get res_image
