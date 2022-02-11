@@ -1,7 +1,0 @@
-services:
-
-  filter_image_django:
-    image: filter_image_django:latest
-    build: .
-    ports:
-      - 8000

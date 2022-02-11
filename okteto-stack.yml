@@ -1,0 +1,9 @@
+name: filter-image-django
+services:
+
+  filter_image_django:
+    public: true
+    image: okteto.dev/filter_image_django:latest
+    build: .
+    ports:
+      - 9000
