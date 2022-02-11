@@ -3,7 +3,7 @@ services:
 
   filter_image_django:
     public: true
-    image:okteto.dev/filter_image_django:latest
+    image: okteto.dev/filter_image_django:latest
     build: .
     replicas: 1
     command: bash -c "gunicorn filter_image_django.wsgi --reload -b 0.0.0.0:8000"
