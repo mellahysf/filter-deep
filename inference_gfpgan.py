@@ -3,6 +3,7 @@ import numpy as np
 import os
 import torch
 from basicsr.utils import imwrite
+from os.path import join, dirname, realpath
 
 from gfpgan import GFPGANer
 
@@ -31,7 +32,9 @@ def inference(imgn):
     suffix = None
     ext = "auto"
     #args = parser.parse_args()
-    test_path = "media/inputs/upload"
+    media_path = join(dirname(realpath(__file__)), 'media/')
+    current_path = dirname(realpath(__file__))
+    test_path = media_path + "inputs/upload"
     if test_path.endswith('/'):
         test_path = test_path[:-1]
     os.makedirs("media/results", exist_ok=True)
@@ -58,8 +61,9 @@ def inference(imgn):
     else:
         bg_upsampler = None
     # set up GFPGAN restorer
+
     restorer = GFPGANer(
-        model_path="experiments/pretrained_models/GFPGANCleanv1-NoCE-C2.pth",
+        model_path=current_path + "/experiments/pretrained_models/GFPGANCleanv1-NoCE-C2.pth",
         upscale=2,
         arch="clean",
         channel_multiplier=2,
@@ -83,18 +87,18 @@ def inference(imgn):
     # save faces
     for idx, (cropped_face, restored_face) in enumerate(zip(cropped_faces, restored_faces)):
         # save cropped face
-        save_crop_path = os.path.join("media/results", 'cropped_faces', f'{basename}_{idx:02d}.png')
+        save_crop_path = os.path.join(media_path + "results", 'cropped_faces', f'{basename}_{idx:02d}.png')
         imwrite(cropped_face, save_crop_path)
         # save restored face
         if suffix is not None:
             save_face_name = f'{basename}_{idx:02d}_{suffix}.png'
         else:
             save_face_name = f'{basename}_{idx:02d}.png'
-        save_restore_path = os.path.join("media/results", 'restored_faces', save_face_name)
+        save_restore_path = os.path.join(media_path + "results", 'restored_faces', save_face_name)
         imwrite(restored_face, save_restore_path)
         # save comparison image
         cmp_img = np.concatenate((cropped_face, restored_face), axis=1)
-        imwrite(cmp_img, os.path.join("media/results", 'cmp', f'{basename}_{idx:02d}.png'))
+        imwrite(cmp_img, os.path.join(media_path + "results", 'cmp', f'{basename}_{idx:02d}.png'))
     # save restored img
     if restored_img is not None:
         if ext == 'auto':
@@ -102,10 +106,10 @@ def inference(imgn):
         else:
             extension = ext
         if suffix is not None:
-            save_restore_path = os.path.join("media/results", 'restored_imgs',
+            save_restore_path = os.path.join(media_path + "results", 'restored_imgs',
                                              f'{basename}_{suffix}.{extension}')
         else:
-            save_restore_path = os.path.join("media/results", 'restored_imgs', f'{basename}.{extension}')
+            save_restore_path = os.path.join(media_path + "results", 'restored_imgs', f'{basename}.{extension}')
         imwrite(restored_img, save_restore_path)
 
     print(f'Results are in the [{"media/results"}] folder.')

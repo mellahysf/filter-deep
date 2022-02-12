@@ -8,6 +8,8 @@ RUN pip install facexlib
 RUN pip install basicsr
 RUN pip install -r /app/filter/requirements.txt
 
+RUN ls -l
+RUN pwd
 
 ENTRYPOINT ["python"]
 CMD ["/app/filter/main.py"]
