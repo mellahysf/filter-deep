@@ -5,4 +5,4 @@ services:
     image: okteto.dev/filter_image_django:latest
     build: .
     ports:
-      - "5000:5000"
+      - "8080:8080"
