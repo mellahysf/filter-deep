@@ -63,7 +63,7 @@ def inference(imgn):
     # set up GFPGAN restorer
 
     restorer = GFPGANer(
-        model_path=current_path + "GFPGANv1.3.pth",
+        model_path=current_path + "/GFPGANv1.3.pth",
         upscale=2,
         arch="clean",
         channel_multiplier=2,
